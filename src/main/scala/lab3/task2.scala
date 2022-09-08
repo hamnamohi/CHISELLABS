@@ -8,9 +8,9 @@ object instructions{
     val i_type = "b0010011".U 
     val s_type = "b0100011".U 
     val u_type = "b0110111".U 
-    val b_type = "b1100011".U 
+    val sb_type = "b1100011".U 
     val j_type ="b1101111".U 
-    val ld_ins = "b0000011".U 
+     
 }
 
 class LM_IO_Interface_ImmdValGen extends Bundle {
@@ -36,7 +36,7 @@ class ImmdValGen extends Module {
             val temp :=Fill(20,io.instr(31))
             io.immd_se := Cat(temp,io.instr(31,12))
         }
-        is(b_type){
+        is(sb_type){
             val temp :=Fill(20,io.instr(31))
             io.immd_se := Cat(temp,io.instr(31),io.instr(7),io.instr(30,25),io.instr(11,8))
         }
@@ -44,9 +44,6 @@ class ImmdValGen extends Module {
             val temp :=Fill(20,io.instr(31))
             io.immd_se := Cat(temp,io.instr(31),io.instr(19,12),io.instr(20),io.instr(30,21))
         }
-        is(ld_ins){
-            val temp :=Fill(20,io.instr(31))
-            io.immd_se := Cat(temp, io.instr(31,20))
-        }
+        
     }
 }
